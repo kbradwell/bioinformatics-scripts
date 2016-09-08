@@ -1,0 +1,10 @@
+##gff-version2
+##source-version RNAmmer-1.2
+##date 2014-12-04
+##Type DNA
+# seqname           source                      feature     start      end   score   +/-  frame  attribute
+# ---------------------------------------------------------------------------------------------------------
+MISC_ORG_contig_00007	RNAmmer-1.2	rRNA	1357	7331	2266.5	-	.	28s_rRNA	
+MISC_ORG_contig_00008	RNAmmer-1.2	rRNA	1901	2015	52.3	+	.	8s_rRNA	
+MISC_ORG_contig_00007	RNAmmer-1.2	rRNA	8888	11607	1067.9	-	.	18s_rRNA	
+# ---------------------------------------------------------------------------------------------------------

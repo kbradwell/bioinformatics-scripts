@@ -1,0 +1,3 @@
+locus_tag	miscORG
+protein_id	gnl|xyzVCU|
+transcript_id	gnl|xyzVCU|mrna.
