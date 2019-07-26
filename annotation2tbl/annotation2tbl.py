@@ -38,9 +38,7 @@ transcript_id   gnl|xyzVCU|mrna.
 Lookup table for gene names to locus tags and coordinates of other features to locus tags
 '''
 
-def getUniqECs(ECs):
-
-	#make into a list of lists
+def makeLoL(ECs):
 	LoL=[]
 	for e in ECs:
 		es=e.strip(".")
@@ -49,8 +47,10 @@ def getUniqECs(ECs):
 		eL=[ x for x in eList if "-" not in x ]
 		#print eL
 		LoL.append(eL)
-	#print LoL
-	
+	return LoL
+
+
+def getUniqECs(LoL):
 	for i in LoL:
 		for j in LoL:
 			if i==j:
@@ -60,12 +60,14 @@ def getUniqECs(ECs):
 					comp=j[0:len(i)]
 					if i==comp:
 						if i in LoL:
-							LoL.remove(i)
+							LoL = [value for value in LoL if value != i]
+							getUniqECs(LoL)
 				elif len(j)<len(i):
 					comp=i[0:len(j)]
 					if j==comp:
 						if j in LoL:
-							LoL.remove(j)
+							LoL = [value for value in LoL if value != j]
+							getUniqECs(LoL)
 				else:
 					pass
 	#print LoL	
@@ -206,7 +208,8 @@ for line in lines:
 	#print "ecNums",ecNums
 	#check all EC number are unique (no subsets e.g. enzyme classes together with lower level EC numbers belonging to them)
 	if "--" not in ecNums:
-		uniqECs=getUniqECs(ecNums)
+		LoL=makeLoL(ecNums)
+		uniqECs=getUniqECs(LoL)
 		# check that product description allows for an EC number i.e. not "hypothetical" or "unknown", if not, use the EC number lookup description
 		if "hypothetical" in nrHit.lower() or "unknown" in nrHit.lower() or "predicted protein" in nrHit.lower() or "related to" in nrHit.lower() or "--" in nrTup[0]:
 			newEnzDesc=[]
